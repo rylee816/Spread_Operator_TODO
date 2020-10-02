@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
 function App() {
-  const [itemArray, setItemArray] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [items, setItems] = useState([]);
 
   function handleChange(event) {
-    const newItem = event.target.value;
+    const itemText = event.target.value;
 
-    setInputText(newItem);
+    setInputText(itemText);
   }
 
-  function pushArray() {
-    setItemArray((prevItems) => {
-      return [...prevItems, inputText];
+  function updateItems() {
+    setItems((prevValue) => {
+      return [...prevValue, inputText];
     });
     setInputText("");
   }
@@ -24,15 +24,15 @@ function App() {
       </div>
       <div className="form">
         <input value={inputText} onChange={handleChange} type="text" />
-        <button onClick={pushArray}>
+        <button onClick={updateItems}>
           <span>Add</span>
         </button>
       </div>
       <div>
         <ol>
-          {itemArray.map((item) => (
-            <li>{item}</li>
-          ))}
+          {items.map((item) => {
+            return <li>{item}</li>;
+          })}
         </ol>
       </div>
     </div>
